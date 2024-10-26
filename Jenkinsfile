@@ -1,15 +1,14 @@
 pipeline {
   agent any
   stages {
-  stage('build') {
+  stage('maven install') {
     steps {
-      git url: 'https://github.com/Geosammy/ansible.git'
-      withMaven(globalMavenSettingsConfig: '', jdk: '', maven: '', mavenSettingsConfig: '', traceability: true) {
-    // some block
+      withMaven(globalMavenSettingsConfig: '', jdk: '', maven: 'maven3', mavenSettingsConfig: '', traceability: true) {
+    sh 'mvn clean install'
 }
-      sh "mvn clean verify"
     }
   }
 
 }
+
 }
